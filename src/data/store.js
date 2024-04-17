@@ -7,11 +7,12 @@ const useStore = create(set => ({
 
 	setEmployees: newEmployees => set(state => ({
 		employees: newEmployees
-	}))
+	})),
 	// increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
 
-
-	// TODO: lägg till add-funktion
+	addEmployee: employee => set(state => ({
+		employees: [ ...state.employees, employee ]
+	}))
 }))
 
 

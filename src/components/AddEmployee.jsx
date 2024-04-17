@@ -1,11 +1,33 @@
 import { useState } from 'react'
+import { useStore } from '../data/store.js'
+import { addEmployee, getEmployees } from '../data/crud.js'
 
 const AddEmployee = () => {
+	const [isLoading, setIsLoading] = useState(false)
 	const [name, setName] = useState('')
 	const [occupation, setOccupation] = useState('')
+	const setEmployees = useStore(state => state.setEmployees)
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
+		// skapa ett objekt för ny employee
+		// lägg till i databasen
+		// hämta listan med anställda igen
+
+		setIsLoading(true)
 		event.preventDefault()
+		const newEmployee = { name: name, occupation: occupation }
+		// TODO: meddela användaren att vi väntar på databasen - visa spinner t.ex.
+		try {
+			await addEmployee(newEmployee)
+			setName('')
+			setOccupation('')
+			setEmployees(await getEmployees())
+		} catch {
+			// TODO: visa felmeddelande för användaren
+
+		} finally {
+			setIsLoading(false)
+		}
 	}
 
 	return (
@@ -28,7 +50,9 @@ const AddEmployee = () => {
 					/>
 			</section>
 
-			<button onClick={handleSubmit} type="submit"> Register </button>
+			<button
+				disabled={isLoading}
+				onClick={handleSubmit} type="submit"> Register </button>
 			</form>
 		</section>
 	)
