@@ -2,11 +2,16 @@ import { collection, getDocs } from 'firebase/firestore/lite'
 import { db } from './fire.js'
 
 
-// Example: read all documents in the "fruits" collection
+
 async function getEmployees() {
+	// Skapa en referens till collection "employees" i databasen
 	const employeeCollection = collection(db, 'employees')
+
+	// Hämta alla dokument i collection "employees"
 	const employeeSnapshot = await getDocs(employeeCollection)
-	console.log('getEmployees: snapshot is', employeeSnapshot)
+	// console.log('getEmployees: snapshot is', employeeSnapshot)
+
+
 	const employeeList = employeeSnapshot.docs.map(doc => withKey(doc))
 	return employeeList
 }

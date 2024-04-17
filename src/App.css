@@ -1,0 +1,14 @@
+.form {
+	margin: 0.5em 0em;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 1em 0;
+}
+.form h3 {
+	margin: 0;
+}
+.form .column {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1em;
+}
