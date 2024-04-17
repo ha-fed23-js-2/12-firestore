@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { getEmployees } from '../data/crud.js'
+import { useStore } from '../data/store.js'
 
 const Employees = () => {
-	const [employees, setEmployees] = useState([
-		{ name: 'Testkalle', occupation: 'Testdisher', key: 'test' }
-	])
+	const { employees, setEmployees } = useStore(state => ({
+		employees: state.employees,
+		setEmployees: state.setEmployees
+	}))
 
 	const handleGetEmployees = async () => {
 		setEmployees(await getEmployees())
