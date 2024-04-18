@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore/lite'
+import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore/lite'
 import { db } from './fire.js'
 
 
@@ -37,7 +37,17 @@ async function deleteEmployee(key) {
 	deleteDoc(docRef)
 }
 
-// TODO: editEmployee
+async function editEmployee(key, updatedEmployee) {
+	// vi behöver en "collection reference"
+	// vi skapar en referens till dokumentet vi ska ändra på
+	// leta upp en funktion som kan uppdatera ett dokument
+	const docRef = doc(collectionRef, key)
+
+	// Två alternativ för att ändra:
+	// updateDoc - uppdaterar ett befintligt objekt
+	// setDoc - uppdaterar eller skapar ett objekt
+	await updateDoc(docRef, updatedEmployee)
+}
 
 
-export { getEmployees, addEmployee, deleteEmployee }
+export { getEmployees, addEmployee, deleteEmployee, editEmployee }

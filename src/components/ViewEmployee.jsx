@@ -26,7 +26,9 @@ const ViewEmployee = ({ employee }) => {
 	return (
 		<section className="row border-bottom alternate">
 			{isEditing ? (
-				<EditEmployee whenEditDone={() => setIsEditing(false)} />
+				<EditEmployee
+					employee={employee}
+					whenEditDone={() => setIsEditing(false)} />
 			) : (
 				<>
 				<div className="flex-grow"> {employee.name} works as {employee.occupation}. </div>
