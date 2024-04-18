@@ -1,23 +1,30 @@
-import { deleteEmployee } from "../data/crud.js"
-
+import { deleteEmployee, getEmployees } from "../data/crud.js"
+import { useStore } from '../data/store.js'
+import { useState } from 'react'
 
 const ViewEmployee = ({ employee }) => {
+	const [isLoading, setIsLoading] = useState(false)
+	const setEmployees = useStore(state => state.setEmployees)
+
 	const handleFire = async () => {
 		// anropa deleteEmployee
-		// uppdatera listan:
+		// uppdatera listan, två alternativ:
 		// 1a. använd getEmployees för att få en ny lista och
 		// 1b. anropa setEmployees för att uppdatera store
 		// 1c. React uppdaterar komponenten med alla anställda
 		// 2. "fuska" - ta bort anställd från listan via Zustand
 
+		setIsLoading(true)
 		await deleteEmployee(employee.key)
-		// TODO - efter rasten
+		const employeesFromDb = await getEmployees()
+		setEmployees(employeesFromDb)
+		setIsLoading(false)
 	}
 
 	return (
 		<section className="row border-bottom alternate">
 			<div className="flex-grow"> {employee.name} works as {employee.occupation}. </div>
-			<button onClick={handleFire}> Fire </button>
+			<button disabled={isLoading} onClick={handleFire}> Fire </button>
 		</section>
 	)
 }
