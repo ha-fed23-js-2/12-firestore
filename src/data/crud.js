@@ -37,6 +37,7 @@ async function deleteEmployee(key) {
 	deleteDoc(docRef)
 }
 
+// TODO: editEmployee
 
 
 export { getEmployees, addEmployee, deleteEmployee }

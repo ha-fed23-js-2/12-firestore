@@ -1,9 +1,11 @@
 import { deleteEmployee, getEmployees } from "../data/crud.js"
 import { useStore } from '../data/store.js'
 import { useState } from 'react'
+import EditEmployee from './EditEmployee.jsx'
 
 const ViewEmployee = ({ employee }) => {
 	const [isLoading, setIsLoading] = useState(false)
+	const [isEditing, setIsEditing] = useState(false)
 	const setEmployees = useStore(state => state.setEmployees)
 
 	const handleFire = async () => {
@@ -23,8 +25,15 @@ const ViewEmployee = ({ employee }) => {
 
 	return (
 		<section className="row border-bottom alternate">
-			<div className="flex-grow"> {employee.name} works as {employee.occupation}. </div>
-			<button disabled={isLoading} onClick={handleFire}> Fire </button>
+			{isEditing ? (
+				<EditEmployee whenEditDone={() => setIsEditing(false)} />
+			) : (
+				<>
+				<div className="flex-grow"> {employee.name} works as {employee.occupation}. </div>
+				<button onClick={() => setIsEditing(true)}> 🖊️ </button>
+				<button disabled={isLoading} onClick={handleFire}> Fire </button>
+				</>
+			)}
 		</section>
 	)
 }
