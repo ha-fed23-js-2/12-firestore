@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, doc } from 'firebase/firestore/lite'
+import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore/lite'
 import { db } from './fire.js'
 
 
@@ -33,7 +33,8 @@ async function addEmployee(employee) {
 
 async function deleteEmployee(key) {
 	const docRef = doc(collectionRef, key)
-	console.log('deleteEmployee: ', docRef);
+	// console.log('deleteEmployee: ', docRef);
+	deleteDoc(docRef)
 }
 
 
