@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { getEmployees } from '../data/crud.js'
 import { useStore } from '../data/store.js'
+import ViewEmployee from './ViewEmployee.jsx'
 
 const Employees = () => {
 	const { employees, setEmployees } = useStore(state => ({
@@ -19,9 +20,7 @@ const Employees = () => {
 				<button onClick={handleGetEmployees}> Get employees </button>
 			</div>
 			{employees.map(e => (
-				<section key={e.key}>
-					{e.name} works as {e.occupation}.
-				</section>
+				<ViewEmployee key={e.key} employee={e} />
 			))}
 		</div>
 	)

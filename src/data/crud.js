@@ -1,8 +1,10 @@
-import { collection, getDocs, addDoc } from 'firebase/firestore/lite'
+import { collection, getDocs, addDoc, doc } from 'firebase/firestore/lite'
 import { db } from './fire.js'
 
 
 const collectionName = 'employees'
+const collectionRef = collection(db, collectionName)
+
 
 async function getEmployees() {
 	// Skapa en referens till collection "employees" i databasen
@@ -26,8 +28,14 @@ function withKey(doc) {
 
 async function addEmployee(employee) {
 	// referens till collection 'employees'
-	const collectionRef = collection(db, collectionName)
 	await addDoc(collectionRef, employee)
 }
 
-export { getEmployees, addEmployee }
+async function deleteEmployee(key) {
+	const docRef = doc(collectionRef, key)
+	console.log('deleteEmployee: ', docRef);
+}
+
+
+
+export { getEmployees, addEmployee, deleteEmployee }

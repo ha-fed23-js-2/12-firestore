@@ -3,7 +3,7 @@ import { create } from 'zustand'
 // set, create
 
 const useStore = create(set => ({
-	employees: [ { name: 'Testkalle', occupation: 'Testdisher', key: 'test' } ],
+	employees: [],
 
 	setEmployees: newEmployees => set(state => ({
 		employees: newEmployees

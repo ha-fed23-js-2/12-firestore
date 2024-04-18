@@ -12,3 +12,17 @@
 	flex-direction: column;
 	margin-bottom: 1em;
 }
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+.flex-grow {
+	flex-grow: 1;
+}
+.border-bottom {
+	border-bottom: 1px dotted darkgray;
+}
+.alternate:nth-child(even) {
+	background-color: rgb(244, 201, 208);
+}
